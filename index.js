@@ -70,26 +70,41 @@
 
   // Initialize viewer.
   var viewer = new Marzipano.Viewer(panoElement, viewerOpts);
-  panoElement.style.cursor = 'grabbing'; // Ensure the initial hover cursor is set
+   panoElement.style.cursor = 'grabbing'; // Ensure the initial hover cursor is set
 
-let isDragging = false;
+  let isDragging = false;
 
-panoElement.addEventListener('mousedown', function() {
-  isDragging = true;
-  panoElement.style.cursor = 'grab';
-});
+  panoElement.addEventListener('mousedown', function() {
+    isDragging = true;
+    panoElement.style.cursor = 'grab';
+  });
 
-panoElement.addEventListener('mouseup', function() {
-  isDragging = false;
-  panoElement.style.cursor = 'grabbing';
-});
-
-panoElement.addEventListener('mouseout', function() {
-  if (isDragging) {
-    panoElement.style.cursor = 'grabbing'; // Revert if mouse leaves during drag
+  panoElement.addEventListener('mouseup', function() {
     isDragging = false;
-  }
-});
+    panoElement.style.cursor = 'grabbing';
+  });
+
+  panoElement.addEventListener('mouseout', function() {
+    if (isDragging) {
+      panoElement.style.cursor = 'grabbing'; // Revert if mouse leaves during drag
+      isDragging = false;
+    }
+  });
+
+  // Optional: Listen for viewer interaction start/stop events if Marzipano provides them
+  // (Consult Marzipano documentation for specific events if available)
+  // For example (this might not be a real Marzipano event):
+  /*
+  viewer.addEventListener('interactionStart', function() {
+    panoElement.style.cursor = 'grab';
+    isDragging = true;
+  });
+
+  viewer.addEventListener('interactionEnd', function() {
+    panoElement.style.cursor = 'grabbing';
+    isDragging = false;
+  });
+  */
 
   // Create scenes.
   var scenes = data.scenes.map(function(data) {
