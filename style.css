@@ -40,6 +40,11 @@ a, a:hover, a:active, a:visited {
   width: 100%;
   height: 100%;
   overflow: hidden;
+  cursor: grabbing; /* Open hand on hover (default state) */
+}
+
+#pano:not(.is-inert):active {
+  cursor: grab;
 }
 
 #titleBar {
